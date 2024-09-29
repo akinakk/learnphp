@@ -26,9 +26,15 @@ class PostsController
         $post->save();
         redirect('/admin/posts');
     }
-    public function show(){
-
-    }
+    public function show($id) {
+        $post = Post::find($id);
+    
+        if ($post) {
+            view('posts/view', compact('post'));
+        } else {
+            echo "Post not found";
+        }
+    }   
     public function edit(){
         $post = Post::find($_GET['id']);
         view('posts/edit', compact('post'));
